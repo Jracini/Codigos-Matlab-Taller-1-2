@@ -1,0 +1,24 @@
+ %Definir FT de bloques:
+G1=tf(5, [1 7]);
+G2=tf(10, [1 1]);
+G3=tf([1 0], [0 1]);
+H1=tf(5, [1 2]);
+H2=tf(3, [1 7]);
+H3=tf(1, [1 3]);
+%Movimiento punto de separación:
+r4=H1/G2;
+%Reducimos r4 que está en paralelo y a G2 con H2 que están en bucle:
+p1=parallel(r4,1);
+l1=feedback(G2,H2);
+%Reducimos los 3 bloques en serie:
+sa=series(l1,p1);
+s1=series(sa,G3);
+%Reducimos el loop de H3:
+l2=feedback(s1,H3);
+%Los bloques que quedan están en serie:
+s2=series(G1,l2);
+%Reducimos la retroalimentación unitaria:
+T=feedback(s2,1);
+Simplificado = minreal(T);
+disp('Funcion de transferencia:');
+Simplificado

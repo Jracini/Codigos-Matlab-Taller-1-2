@@ -1,0 +1,20 @@
+G1 = tf(2,[1 3]);
+G2 = tf(3,[1 2]);
+G3 = tf([1 1],[1 4]);
+G4 = tf(5,[1 2]);
+G5 = tf(3,[1 2]);
+G6 = tf(1,[1 1]);
+%Eliminamos la retroalimentación unitaria en G2
+lul = feedback(G2,1);
+%reducimos G4 y G5 que están en paralelo
+pl= parallel(G4,G5);
+%multiplicamos los 4 bloques en serie
+s1= series(G1,lul);
+s2= series(G3,pl);
+sf= series(s1,s2);
+%reducimos el loop que queda con G6
+T = feedback(sf,G6);
+%Usamos la función minreal para simplificar la función de transferencia
+Simplificado = minreal(T);
+disp('Función de transferencia:');
+Simplificado
