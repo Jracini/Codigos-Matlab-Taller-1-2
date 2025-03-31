@@ -1,0 +1,23 @@
+% Definir la variable de Laplace
+s = tf('s');
+% Definir las funciones de transferencia
+G1 = 2 / (s + 1);
+G2 = 1 / (s + 3);
+G3 = 4 / (s + 4);
+G4 = 3 / (s + 2);
+H1 = 0.1;
+H2 = 0.2;
+
+% Calcular G_directo (Ganancia en el lazo directo)
+G{directo} = G1 * G4;
+% Calcular G_bloque1 (Retroalimentación con H1)
+G_bloque1 = feedback(Gdirecto, H1, -1);  % Retroalimentación negativa
+% Calcular G_bloque2 (Suma de G2 y G3)
+G_bloque2 = G2 + G3;
+% Calcular G_open (Lazo abierto completo)
+G_open = Gbloque1 * Gbloque2;
+% Calcular G_cl (Lazo cerrado con H2)
+G_cl = feedback(Gopen, H2, -1);  % Retroalimentación negativa
+% Mostrar resultado
+disp('Función de transferencia en lazo cerrado:')
+G_cl
