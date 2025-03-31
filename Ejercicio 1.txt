@@ -9,15 +9,15 @@ H1 = 0.1;
 H2 = 0.2;
 
 % Calcular G_directo (Ganancia en el lazo directo)
-G{directo} = G1 * G4;
+G_directo = G1 * G4;
 % Calcular G_bloque1 (Retroalimentación con H1)
-G_bloque1 = feedback(Gdirecto, H1, -1);  % Retroalimentación negativa
+G_bloque1 = feedback(G_directo, H1, -1);  % Retroalimentación negativa
 % Calcular G_bloque2 (Suma de G2 y G3)
 G_bloque2 = G2 + G3;
 % Calcular G_open (Lazo abierto completo)
-G_open = Gbloque1 * Gbloque2;
+G_open = G_bloque1 * G_bloque2;
 % Calcular G_cl (Lazo cerrado con H2)
-G_cl = feedback(Gopen, H2, -1);  % Retroalimentación negativa
+G_cl = feedback(G_open, H2, -1);  % Retroalimentación negativa
 % Mostrar resultado
 disp('Función de transferencia en lazo cerrado:')
 G_cl
