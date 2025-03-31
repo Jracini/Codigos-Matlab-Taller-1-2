@@ -1,0 +1,3 @@
+syms t s
+u=1
+U=laplace(u,t,s)

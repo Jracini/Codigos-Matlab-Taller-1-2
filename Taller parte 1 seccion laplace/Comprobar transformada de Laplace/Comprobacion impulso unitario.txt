@@ -1,0 +1,3 @@
+syms t s
+u=dirac(t)
+U=laplace(u,t,s)

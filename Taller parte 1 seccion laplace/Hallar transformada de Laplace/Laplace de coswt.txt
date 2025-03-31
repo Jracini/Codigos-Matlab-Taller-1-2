@@ -1,0 +1,4 @@
+syms t s w
+f=cos(w*t)
+F=laplace(f,t,s)
+disp('Dónde la w representa a la omega con la que se trabajó, y la f mayúscula la transformada.')
