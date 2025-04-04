@@ -1,0 +1,18 @@
+%% Asignamos numeradores de G(s)
+numG1=[10];
+numG2=[1];
+numG3=[540];
+numG4=[0.1];
+%% Asignamos denominadores de G(s)
+denoG1=[1 1];
+denoG2=[2 0.5];
+%%Formamos las funciones de transferencia
+G1=tf(numG1, denoG1);
+G2=tf(numG2, denoG2);
+G3=tf(numG3, 1);
+G4=tf(numG4, 1);
+%% Reducimos
+G12=series(G1, G2)  % Multiplicación de G1*G2
+Gcl= feedback(G12, G4) %% Retroalimentacción negativa G12/1+G12*G4
+G3cl=series(Gcl, G3)  % Multiplicación de Gcl*G3
+GT= feedback(G3cl, 1) %% Retroalimentacción unitaria G3cl/1+G3cl
