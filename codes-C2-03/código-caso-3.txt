@@ -1,0 +1,19 @@
+%Variables de caso 3
+K = tf(10);
+G = tf(4, [1 0]);
+H = tf(5);
+
+%Reducimos los dos bloques en serie
+s = series(K, G);
+
+%reducimos el feedback que se genera
+T = feedback(s, H);
+disp('Funcion de transferencia:')
+T
+
+%Graficamos la respuesta del sistema a la entrada escalón unitario
+step(T);
+title('Respuesta al Escalón Unitario');
+xlabel('Tiempo');
+ylabel('Amplitud');
+grid on;
