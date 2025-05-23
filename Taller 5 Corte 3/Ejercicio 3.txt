@@ -1,0 +1,26 @@
+% Ejercicio 3
+G3 = 1/(s^3+9*s^2+4*s+7);
+
+% Ajuste del PID
+Kp3 = 15;
+Ki3 = 8;
+Kd3 = 5;
+C3 = pid(Kp3, Ki3, Kd3);
+
+% Sistema en lazo cerrado sin PID
+sys3_nopid = feedback(G3,1);
+
+% Sistema en lazo cerrado con PID
+sys3_pid = feedback(C3*G3,1);
+
+% Graficar ambas respuestas
+figure;
+subplot(2,1,1);
+step(sys3_nopid);
+title('Ejercicio 3 - Respuesta sin PID');
+grid on;
+
+subplot(2,1,2);
+step(sys3_pid);
+title('Ejercicio 3 - Respuesta con PID');
+grid on;

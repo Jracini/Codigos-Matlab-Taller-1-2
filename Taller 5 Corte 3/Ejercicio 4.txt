@@ -1,0 +1,26 @@
+% Ejercicio 4
+G4 = (542*s+86)/(33*s^2+5*s+21);
+
+% Ajuste del PID
+Kp4 = 0.5;
+Ki4 = 0.1;
+Kd4 = 0.3;
+C4 = pid(Kp4, Ki4, Kd4);
+
+% Sistema en lazo cerrado sin PID
+sys4_nopid = feedback(G4,1);
+
+% Sistema en lazo cerrado con PID
+sys4_pid = feedback(C4*G4,1);
+
+% Graficar ambas respuestas
+figure;
+subplot(2,1,1);
+step(sys4_nopid);
+title('Ejercicio 4 - Respuesta sin PID');
+grid on;
+
+subplot(2,1,2);
+step(sys4_pid);
+title('Ejercicio 4 - Respuesta con PID');
+grid on;
