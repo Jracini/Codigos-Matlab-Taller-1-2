@@ -2,13 +2,13 @@
 G2 = 1/(s^2+10*s+20);
 
 % Ajuste del PID
-Kp2 = 12;
-Ki2 = 5;
-Kd2 = 3;
+Kp2 = 200;
+Ki2 = 150;
+Kd2 = 20;
 C2 = pid(Kp2, Ki2, Kd2);
 
 % Sistema en lazo cerrado sin PID
-sys2_nopid = feedback(G2,1);
+sys2_nopid = G2;
 
 % Sistema en lazo cerrado con PID
 sys2_pid = feedback(C2*G2,1);
@@ -16,11 +16,11 @@ sys2_pid = feedback(C2*G2,1);
 % Graficar ambas respuestas
 figure;
 subplot(2,1,1);
-step(sys2_nopid);
+step(sys2_nopid, 3);
 title('Ejercicio 2 - Respuesta sin PID');
 grid on;
 
 subplot(2,1,2);
-step(sys2_pid);
+step(sys2_pid, 3);
 title('Ejercicio 2 - Respuesta con PID');
 grid on;
