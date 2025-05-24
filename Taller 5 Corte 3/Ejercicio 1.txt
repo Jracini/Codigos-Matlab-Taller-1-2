@@ -17,6 +17,6 @@ step(G1, 30)
 title('Ejercicio 1 - Respuesta sin PID');
 
 subplot(2,1,2);
-step(sys1_pid, 0.1);
+step(sys1_pid, 0.5);
 title('Ejercicio 1 - Respuesta con PID');
 grid on;
